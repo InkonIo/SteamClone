@@ -52,7 +52,6 @@ public class UserAccount {
         }
     }
 
-
     public static boolean login(String email, String password) {
         String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
         try (Connection conn = DatabaseManager.getConnection();

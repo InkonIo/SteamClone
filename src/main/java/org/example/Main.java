@@ -11,7 +11,6 @@ public class Main {
         System.out.println("Хало!!!");
         System.out.println("Для выхода введите 0");
 
-        // Основной цикл программы
         while (true) {
             System.out.print("Выбери 1 - регистр, 2 - это вход, 0 - завершить: ");
             int choice = -1;
@@ -20,12 +19,12 @@ public class Main {
                 choice = Integer.parseInt(scanner.nextLine());
             } catch (NumberFormatException e) {
                 System.out.println("❌ Введи норм!! а не то по шапке");
-                continue; // Запрашиваем снова
+                continue;
             }
 
             if (choice == 0) {
                 System.out.println("Выход из системы.");
-                break; // Выход из цикла
+                break;
             }
 
             if (choice == 1) {
@@ -49,9 +48,7 @@ public class Main {
                 System.out.print("Пароль: ");
                 String loginPassword = scanner.nextLine();
 
-                // Проверка правильности логина и пароля
                 if (UserAccount.login(loginEmail, loginPassword)) {
-                    // Если админ
                     if (Admin.isAdmin(loginEmail, loginPassword)) {
                         System.out.println("✅ Вход выполнен как администратор: " + loginEmail);
                         Admin admin = new Admin(0, loginEmail, loginPassword, null,

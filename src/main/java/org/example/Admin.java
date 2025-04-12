@@ -24,11 +24,9 @@ class Admin extends UserAccount {
     }
 
     public static boolean isAdmin(String loginEmail, String loginPassword) {
-        // Проверка на администратора
         return loginEmail.equals("And") && loginPassword.equals("1");
     }
 
-    // Метод для управления пользователями
     public void manageUsers(Scanner scanner) {
         while (true) {
             System.out.println("\nПривет, админ! Выберите действие:");
@@ -38,7 +36,7 @@ class Admin extends UserAccount {
             System.out.println("0 - Выход");
 
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Чистим буфер
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
@@ -65,7 +63,6 @@ class Admin extends UserAccount {
         }
     }
 
-    // Показать всех пользователей
     public void showUsers() {
         String sql = "SELECT * FROM users";
         try (Connection conn = DatabaseManager.getConnection();
@@ -83,7 +80,6 @@ class Admin extends UserAccount {
         }
     }
 
-    // Удаление пользователя
     public void removeUser(String email) {
         String sql = "DELETE FROM users WHERE email = ?";
         try (Connection conn = DatabaseManager.getConnection();
@@ -100,7 +96,6 @@ class Admin extends UserAccount {
         }
     }
 
-    // Изменение пароля пользователя
     public void updatePassword(String email, String newPassword) {
         String sql = "UPDATE users SET password = ? WHERE email = ?";
         try (Connection conn = DatabaseManager.getConnection();
