@@ -48,12 +48,6 @@ public class UserAccount {
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            if (e.getMessage().contains("UNIQUE constraint failed")) {
-                // Это ошибка уникальности email в базе данных
-                System.out.println("❌ Такой email уже существует. Пожалуйста, используйте другой.");
-            } else {
-                System.out.println("Registration error: " + e.getMessage());
-            }
             return false;
         }
     }
@@ -66,15 +60,13 @@ public class UserAccount {
             pstmt.setString(1, email);
             pstmt.setString(2, password);
             ResultSet rs = pstmt.executeQuery();
-            return rs.next(); // true если найден пользователь
+            return rs.next();
         } catch (SQLException e) {
-            System.out.println("Login error: " + e.getMessage());
             return false;
         }
     }
 
     public void showRole() {
-
     }
 
     private void logout() {

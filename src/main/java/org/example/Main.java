@@ -1,8 +1,6 @@
 package org.example;
 
 import Database.DatabaseManager;
-
-import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Main {
@@ -17,7 +15,6 @@ public class Main {
         while (true) {
             System.out.print("Выбери 1 - регистр, 2 - это вход, 0 - завершить: ");
             int choice = -1;
-
 
             try {
                 choice = Integer.parseInt(scanner.nextLine());
@@ -52,13 +49,18 @@ public class Main {
                 System.out.print("Пароль: ");
                 String loginPassword = scanner.nextLine();
 
+                // Проверка правильности логина и пароля
                 if (UserAccount.login(loginEmail, loginPassword)) {
+                    // Если админ
                     if (Admin.isAdmin(loginEmail, loginPassword)) {
+                        System.out.println("✅ Вход выполнен как администратор: " + loginEmail);
                         Admin admin = new Admin(0, loginEmail, loginPassword, null,
                                 "Admin User", "", "", "", "", "", 0, "");
                         admin.displayRole();
+                        admin.manageUsers(scanner);
+                    } else {
+                        System.out.println("✅ Вход выполнен как обычный пользователь: " + loginEmail);
                     }
-                    System.out.println("✅ Вход выполнен!" + loginEmail);
                     break;
                 } else {
                     System.out.println("❌ Неверный логин или пароль.");
@@ -70,4 +72,4 @@ public class Main {
 
         scanner.close();
     }
-} // такой заеб но за то работает :D
+}
